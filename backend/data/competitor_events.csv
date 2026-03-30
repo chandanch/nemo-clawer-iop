@@ -1,0 +1,9 @@
+scenario_id,tick,message,type
+competitor-entry,3,New entrant "PriceSlash" detected — 18% below market,new
+competitor-entry,8,Competitor A responds with 5% promotional discount,promo
+competitor-entry,14,PriceSlash raises prices by 7% (burn rate concerns),raise
+seasonal-peak,5,Competitor B raises prices +12% for holiday season,raise
+seasonal-peak,11,Competitor C launches early Black Friday promo,promo
+flash-sale,2,FLASH SALE: Competitor drops price 35% for 4 hours,drop
+flash-sale,10,Flash sale ending in 60 minutes — demand stabilizing,promo
+markdown-clearance,6,Category entering markdown season — broad price decline,drop

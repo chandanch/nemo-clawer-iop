@@ -1,0 +1,5 @@
+id,name,description,product,duration_ticks,category
+competitor-entry,New Competitor Entry,A new competitor launches with aggressive pricing. Defend market share while protecting margins.,both,20,Competitive Response
+seasonal-peak,Seasonal Peak Pricing,Holiday season approaching. Maximize revenue while avoiding demand destruction.,both,18,Demand Optimization
+flash-sale,Flash Sale Response,Competitor launches a 4-hour flash sale. React in real-time to capture diverted demand.,openclaw,15,Real-time Response
+markdown-clearance,Inventory Clearance,End-of-season inventory needs to clear. Find the optimal markdown path.,nemoclaw,16,Markdown Optimization

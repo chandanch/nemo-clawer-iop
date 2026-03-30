@@ -1,0 +1,3 @@
+id,name,tagline,color,color_light,speed_score,competitor_intel_score,elasticity_score,margin_protection_score,forecasting_score,personalization_score,best_for
+openclaw,OpenClaw,Real-time competitive pricing intelligence,#2563EB,#60A5FA,96,94,78,82,71,65,"E-commerce, flash sales, high-SKU retail, competitive markets"
+nemoclaw,NemoClaw,Deep demand intelligence & strategic pricing,#059669,#34D399,74,81,97,91,95,89,"SaaS, subscriptions, B2B pricing, seasonal businesses, luxury retail"

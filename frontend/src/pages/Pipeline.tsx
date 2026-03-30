@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowRight, Brain, Database, Filter, Gauge, Globe, Play, Settings, ShieldCheck, Sparkles, Zap } from 'lucide-react';
+import { ArrowRight, Brain, Database, Filter, Play, Settings, ShieldCheck, Sparkles, Zap } from 'lucide-react';
 import { PRODUCTS } from '../data/products';
 
 interface PipelineNode {
@@ -13,18 +13,8 @@ interface PipelineNode {
   y: number;
 }
 
-const OPENCLAW_NODES: PipelineNode[] = [
-  { id: 'ingest', label: 'Data Ingestion', description: 'Real-time data streams', detail: 'Ingests live feeds from 500+ competitor websites, marketplaces, and price aggregators. Sub-100ms latency via streaming architecture.', icon: Database, x: 0, y: 0 },
-  { id: 'scrape', label: 'Competitor Scrape', description: 'Price signal extraction', detail: 'Extracts and normalizes competitor prices, product matches, and promotional signals. ML-powered SKU matching across disparate catalogs.', icon: Globe, x: 1, y: 0 },
-  { id: 'features', label: 'Feature Engineering', description: 'Signal transformation', detail: 'Computes 84 real-time features: price gaps, rank positions, velocity trends, inventory signals, and temporal patterns.', icon: Filter, x: 2, y: 0 },
-  { id: 'elasticity', label: 'Elasticity Model', description: 'Demand sensitivity', detail: 'Lightweight gradient boosting model estimates price elasticity per SKU in under 5ms. Updated hourly on rolling 30-day windows.', icon: Gauge, x: 3, y: 0 },
-  { id: 'optimize', label: 'Price Optimizer', description: 'Optimal price search', detail: 'Constrained optimization under margin floors, competitive position targets, and inventory objectives. Evaluates 50+ candidate prices per SKU.', icon: Settings, x: 4, y: 0 },
-  { id: 'validate', label: 'Rules Engine', description: 'Guardrail validation', detail: 'Applies business rules: margin minimums, MAP compliance, bundle pricing consistency, promotional locks, and channel parity constraints.', icon: ShieldCheck, x: 5, y: 0 },
-  { id: 'output', label: 'Price Execution', description: 'Decision delivery', detail: 'Publishes price decisions via REST API and webhooks in <100ms. Supports batch and streaming modes with full audit logging.', icon: Zap, x: 6, y: 0 },
-];
-
-const NEMOCLAW_NODES: PipelineNode[] = [
-  { id: 'ingest', label: 'Data Ingestion', description: 'Multi-source data fusion', detail: 'Combines transactional history, competitor data, external signals (weather, events, macroeconomics), and customer behavioral data.', icon: Database, x: 0, y: 0 },
+const PIPELINE_NODES: PipelineNode[] = [
+  { id: 'ingest', label: 'Data Ingestion', description: 'Multi-source data fusion', detail: 'Combines transactional history, competitor data, external signals (weather, events, macroeconomics), and customer behavioral data from 500+ sources.', icon: Database, x: 0, y: 0 },
   { id: 'history', label: 'Historical Analysis', description: '180-day pattern learning', detail: 'Deep analysis of 180 days of demand history per SKU. Decomposes trends, seasonality, and event effects using time-series transformers.', icon: Brain, x: 1, y: 0 },
   { id: 'forecast', label: 'Demand Forecast', description: 'Deep learning prediction', detail: 'Transformer-based demand model predicts unit sales across 14–90 day horizons with confidence intervals. 94.7% accuracy on held-out test sets.', icon: Sparkles, x: 2, y: 0 },
   { id: 'seasonality', label: 'Seasonality Engine', description: 'Temporal decomposition', detail: 'Identifies and models weekly, monthly, and annual seasonality patterns. Automatically detects structural breaks and regime changes.', icon: Filter, x: 3, y: 0 },
@@ -39,14 +29,14 @@ export function Pipeline() {
   const [isAnimating, setIsAnimating] = useState(false);
   const [activeNodeIdx, setActiveNodeIdx] = useState(-1);
 
-  const nodes = activeProduct === 'openclaw' ? OPENCLAW_NODES : NEMOCLAW_NODES;
+  const nodes = PIPELINE_NODES;
   const product = PRODUCTS[activeProduct];
 
   const runAnimation = () => {
     if (isAnimating) return;
     setIsAnimating(true);
     setActiveNodeIdx(0);
-    nodes.forEach((_, i) => {
+    nodes.forEach((_: PipelineNode, i: number) => {
       setTimeout(() => {
         setActiveNodeIdx(i);
         if (i === nodes.length - 1) {
@@ -101,7 +91,7 @@ export function Pipeline() {
         {/* Pipeline visualization */}
         <div className="rounded-2xl p-6 mb-6" style={{ background: 'rgba(15,22,36,0.8)', border: '1px solid rgba(255,255,255,0.08)' }}>
           <div className="flex items-center gap-2 overflow-x-auto pb-2">
-            {nodes.map((node, i) => {
+            {nodes.map((node: PipelineNode, i: number) => {
               const isActive = activeNodeIdx === i;
               const isComplete = activeNodeIdx > i;
               const isSelected = selectedNode?.id === node.id;
@@ -188,41 +178,34 @@ export function Pipeline() {
           )}
         </AnimatePresence>
 
-        {/* Architecture comparison */}
-        <div className="grid md:grid-cols-2 gap-4">
-          {(['openclaw', 'nemoclaw'] as const).map(id => {
-            const p = PRODUCTS[id];
-            const pipelineNodes = id === 'openclaw' ? OPENCLAW_NODES : NEMOCLAW_NODES;
-            return (
-              <motion.div
-                key={id}
-                initial={{ opacity: 0, y: 16 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                className="rounded-xl p-5"
-                style={{ background: 'rgba(15,22,36,0.8)', border: `1px solid ${p.color}33` }}
-              >
-                <div className="flex items-center gap-2 mb-4">
-                  <div className="w-7 h-7 rounded-lg flex items-center justify-center text-white text-xs font-bold" style={{ background: p.color }}>{p.name.slice(0, 2)}</div>
-                  <h4 className="font-semibold text-white">{p.name} Architecture</h4>
+        {/* Pipeline step reference */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          className="rounded-xl p-5"
+          style={{ background: 'rgba(15,22,36,0.8)', border: '1px solid rgba(255,255,255,0.08)' }}
+        >
+          <div className="flex items-center gap-2 mb-4">
+            <h4 className="font-semibold text-white">Unified Agent Pipeline</h4>
+            <span className="text-xs px-2 py-0.5 rounded-full ml-2" style={{ background: 'rgba(255,255,255,0.06)', color: '#64748B' }}>
+              shared across OpenClaw &amp; NemoClaw
+            </span>
+          </div>
+          <div className="grid sm:grid-cols-2 gap-2">
+            {PIPELINE_NODES.map((node: PipelineNode, i: number) => (
+              <div key={node.id} className="flex items-center gap-3 py-1.5 px-3 rounded-lg" style={{ background: 'rgba(255,255,255,0.03)' }}>
+                <span className="text-xs font-mono w-4 shrink-0" style={{ color: '#334155' }}>{String(i + 1).padStart(2, '0')}</span>
+                <div className="w-5 h-5 rounded flex items-center justify-center shrink-0" style={{ background: 'rgba(255,255,255,0.06)' }}>
+                  <node.icon size={11} color="#64748B" />
                 </div>
-                <div className="space-y-2">
-                  {pipelineNodes.map((node, i) => (
-                    <div key={node.id} className="flex items-center gap-3 py-1.5 px-3 rounded-lg" style={{ background: 'rgba(255,255,255,0.03)' }}>
-                      <span className="text-xs font-mono w-4" style={{ color: '#334155' }}>{String(i + 1).padStart(2, '0')}</span>
-                      <div className="w-5 h-5 rounded flex items-center justify-center shrink-0" style={{ background: `${p.colorGlow}` }}>
-                        <node.icon size={11} color={p.colorLight} />
-                      </div>
-                      <div>
-                        <span className="text-xs font-medium text-white">{node.label}</span>
-                        <span className="text-xs ml-2" style={{ color: '#475569' }}>{node.description}</span>
-                      </div>
-                    </div>
-                  ))}
+                <div>
+                  <span className="text-xs font-medium text-white">{node.label}</span>
+                  <span className="text-xs ml-2" style={{ color: '#475569' }}>{node.description}</span>
                 </div>
-              </motion.div>
-            );
-          })}
-        </div>
+              </div>
+            ))}
+          </div>
+        </motion.div>
       </div>
     </div>
   );

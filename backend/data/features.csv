@@ -1,0 +1,20 @@
+name,category,openclaw,nemoclaw
+Real-time price scraping,Competitive Intel,true,Curated
+Competitor monitoring sources,Competitive Intel,500+,200+
+Price change alerts,Competitive Intel,true,true
+Market share tracking,Competitive Intel,true,true
+Demand forecasting horizon,Forecasting,7 days,180 days
+Deep learning models,Forecasting,false,true
+Seasonality detection,Forecasting,Basic,Advanced
+External signal integration,Forecasting,false,true
+Portfolio optimization,Optimization,false,true
+Margin floor guardrails,Optimization,true,true
+Bundle pricing,Optimization,false,true
+Dynamic markdown,Optimization,true,true
+Individual personalization,Optimization,false,true
+A/B price testing,Testing,true,true
+Bandit optimization,Testing,false,true
+REST API,Integration,true,true
+Webhook support,Integration,true,true
+Batch pricing API,Integration,true,true
+Real-time streaming API,Integration,true,false
